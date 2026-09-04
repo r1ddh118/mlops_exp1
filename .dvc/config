@@ -1,0 +1,6 @@
+[core]
+    remote = myremotes
+['remote "myremotes3"']
+    url = s3://riddhi.dvc
+['remote "myremotes"']
+    url = s3://riddhi.s3
