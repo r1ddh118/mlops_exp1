@@ -3,11 +3,17 @@
 # Runs the test_pipeline.py suite (data_ingestion.py + data_preprocessing.py)
 # on every push / PR. Save this file as: .github/workflows/ci.yaml
 #
+<<<<<<< HEAD
 # Requirements:
 #   - test_pipeline.py, data_ingestion.py, data_preprocessing.py must be
 #     committed to the repo (this workflow does not create them).
 #   - No requirements.txt is required; core deps are installed directly.
 #     If you DO have a requirements.txt, it will be picked up automatically.
+=======
+# It does NOT require params.yaml, a real Census .xls file, or real
+# logger.py / exception.py modules — the tests either mock those out
+# or fall back to lightweight stubs.
+>>>>>>> e06314b03220e2d45e12fc57584dec9819d35d67
 
 name: CI - Pipeline Tests
 
@@ -36,6 +42,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+<<<<<<< HEAD
           # no "cache: pip" here -- it errors out when there's no
           # requirements.txt/pyproject.toml lockfile to key the cache on
 
@@ -43,11 +50,15 @@ jobs:
         run: |
           echo "Working directory: $(pwd)"
           find . -maxdepth 2 -type f \( -name "*.py" -o -name "requirements.txt" \)
+=======
+          cache: "pip"
+>>>>>>> e06314b03220e2d45e12fc57584dec9819d35d67
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install pytest pandas pyyaml
+<<<<<<< HEAD
           if [ -f requirements.txt ]; then
             echo "Found requirements.txt, installing it too"
             pip install -r requirements.txt
@@ -59,6 +70,10 @@ jobs:
             echo "::error::test_pipeline.py not found in repo root. Make sure it's committed."
             exit 1
           fi
+=======
+          # Pull in any project-declared dependencies too, if present
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+>>>>>>> e06314b03220e2d45e12fc57584dec9819d35d67
 
       - name: Run test suite
         run: pytest test_pipeline.py -v --junitxml=test-results.xml
@@ -69,4 +84,7 @@ jobs:
         with:
           name: test-results-py${{ matrix.python-version }}
           path: test-results.xml
+<<<<<<< HEAD
           if-no-files-found: ignore
+=======
+>>>>>>> e06314b03220e2d45e12fc57584dec9819d35d67
