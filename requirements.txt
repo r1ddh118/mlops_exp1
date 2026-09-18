@@ -1,0 +1,18 @@
+# requirements.txt
+# Derived from the actual imports used across the uploaded codebase
+# (src/data_ingestion.py, data_preprocessing.py, feature_engg.py,
+# model_training.py, model_eval.py, logger.py, exception.py, and
+# app/main.py).
+
+# --- Training pipeline (src/) ---
+pandas>=2.2,<3.0
+numpy>=1.26,<3.0
+scikit-learn>=1.4,<2.0
+pyyaml>=6.0,<7.0
+xlrd>=2.0,<3.0          # pd.read_excel(puf2022.xls) in data_ingestion.py
+dvc>=3.0,<4.0            # pipeline stage tracking (dvc.yaml / dvc.lock)
+
+# --- Serving API (app/main.py) ---
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.29,<1.0
+pydantic>=2.6,<3.0
